@@ -10,6 +10,13 @@ import java.util.regex.Pattern;
 
 /**
  * Main program which implements the AES
+ * algorithm. This program will read in a file
+ * containing the operation, mode, transmission size,
+ * input text, key, and initialization vector. It will
+ * then perform the AES algorithm on the input text
+ * using the specified operation and mode. The result
+ * will be printed to the console.
+ * 
  */
 public class AESImplementation {
     private int operation;
@@ -23,6 +30,20 @@ public class AESImplementation {
     /**
      * This is the main method where the input will be scanned and any whitespace or junk character is removed
      * and formatted
+     * @param args
+     * @throws IOException
+     * @throws URISyntaxException
+     * @throws InterruptedException
+     * @throws ClassNotFoundException
+     * @throws NoSuchFieldException
+     * @throws IllegalAccessException
+     * @throws NoSuchMethodException
+     * @throws InvocationTargetException
+     * @throws InstantiationException
+     * @throws IllegalArgumentException
+     * @throws SecurityException
+     * @throws Exception
+     * @throws Throwable
      *
      *
      */
@@ -93,9 +114,18 @@ public class AESImplementation {
         }
 
         // Expand Key
+        // The key will be in hex format and will be converted to bytes before being passed to the AES algorithm.
         this.aes.expansionKey = this.aes.keyExpansion(this.key);
 
-        // Now run encrypt/decrypt
+  
+        /**
+         * The encrypt/decrypt function will take the input text and key and
+         * initialization vector and perform the AES algorithm on it. The result
+         * will be printed to the console. The input text will be in hex format
+         * and will be converted to bytes before being passed to the AES algorithm.
+         * The key and initialization vector will also be in hex format and will
+         * be converted to bytes before being passed to the AES algorithm. 
+         */
         String result;
         if (this.operation == 0) {
             System.out.println("Encrypting input...");
@@ -112,6 +142,14 @@ public class AESImplementation {
 
     /**
      * Helper function to read in file
+     * @param path
+     * @param encoding
+     * @return
+     * @throws IOException
+     * @throws URISyntaxException
+     * @throws Exception
+     * @throws Throwable
+     * 
      */
     private static String readFile(String path, Charset encoding)
             throws IOException {
