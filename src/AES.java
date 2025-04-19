@@ -1,3 +1,20 @@
+/**
+ * This abstract class contains the method that is needed to run in
+ * order to perform AES encryption and decryption.
+ * It contains the methods for key expansion, add round key, mix columns,
+ * shift rows, inverse shift rows, substitute bytes, and inverse substitute bytes.
+ * It also contains the method to parse the initialization vector and
+ * convert the state to a string.
+ * The class also contains the abstract methods for encryption and decryption.
+ * The class is extended by the AES_ECB and AES_CBC classes which implement
+ * the encryption and decryption methods.
+ * The class also contains the initialization vector which is used in the CBC mode of operation.
+ * The class also contains the expansion key which is used in the encryption and decryption process.
+ * The class also contains the S-Box and inverse S-Box which are used in the substitution process.
+ * The class also contains the Galois multiplication tables which are used in the mix columns process.
+ * The class also contains the round constants which are used in the key expansion process.
+ * The class also contains the mix columns and inverse mix columns tables which are used in the mix columns process.
+ */
 public abstract class AES {
     protected int[][] expansionKey;
     protected int[][] initializationVector = new int[4][4];
@@ -5,6 +22,14 @@ public abstract class AES {
     /**
      * This method does the Key expansion process which will send the expanded key to subsequent rounds.
      * This method takes input as String and outputs a 2 * 2 integer matrix.
+     * The key is parsed into a 4x4 matrix and then expanded to 44 keys.
+     * The key is expanded by using the g function which rotates the word and substitutes the bytes with Sbox values.
+     * The g function is called for every 4th word and the result is XORed with the previous word.
+     * The key is expanded by using the rcon values which are used to XOR the first byte of the word.
+     * The key is expanded by using the Sbox values which are used to substitute the bytes of the word.
+     * The key is expanded by using the galois multiplication tables which are used to multiply the bytes of the word.
+     * The key is expanded by using the mix columns and inverse mix columns tables which are used to mix the columns of the word.
+     * The key is expanded by using the round constants which are used to XOR the first byte of the word.
      *
      * @param key
      * @output expandedKey
@@ -53,6 +78,11 @@ public abstract class AES {
      *
      * The purpose of this function is to rotate the word for every 4th word and
      * substitute the bytes with Sbox values.
+     * The function takes the last word of the key and rotates it.
+     * The function then substitutes the bytes with Sbox values.
+     * The function then XORs the first byte of the word with the rcon value.
+     * The function then returns the new word.
+     * The function is called for every 4th word and the result is XORed with the previous word.
      *
      * @param a
      */
@@ -80,6 +110,8 @@ public abstract class AES {
 
     /**
      * Adds round key to state by performing XOR operation.
+     * The round key is obtained from the expanded key.
+     * The round key is obtained by taking the first 4 bytes of the expanded key.
      */
     protected int[][] addRoundKey(int[][] state, int round) {
         int[][] roundKey = new int[4][4];
